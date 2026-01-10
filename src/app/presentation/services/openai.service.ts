@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProConsResponse } from '@interfaces/pro-cons.response';
-import { orthographyUseCase, proConsDiscusser } from '@use-cases/index';
+import { orthographyUseCase, proConsDiscusserUseCase, proConsStreamUseCase } from '@use-cases/index';
 import { from, map } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class OpenAiService {
   }
 
   proCons(prompt: string) {
-    return from(proConsDiscusser(prompt)).pipe(
+    return from(proConsDiscusserUseCase(prompt)).pipe(
       map((response) => {
         return {
           text: response.parts[0]?.text ?? '',
@@ -20,5 +20,9 @@ export class OpenAiService {
         } as IProConsResponse;
       })
     );
+  }
+
+  proConsStream(prompt: string, abortSignal: AbortSignal) {
+    return proConsStreamUseCase(prompt, abortSignal);
   }
 }

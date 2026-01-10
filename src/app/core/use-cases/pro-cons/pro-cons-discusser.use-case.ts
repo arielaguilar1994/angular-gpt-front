@@ -1,6 +1,6 @@
 import { environment } from 'environments/environment';
 
-export const proConsDiscusser = async (prompt: string) => {
+export const proConsDiscusserUseCase = async (prompt: string) => {
   try {
     const response = await fetch(`${environment.backendApi}/pros-cons-discusser`, {
       method: 'POST',
