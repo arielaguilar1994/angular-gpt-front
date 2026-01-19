@@ -1,1 +1,28 @@
-<p>translate-page works!</p>
+<div class="chat-container">
+  <div class="chat-messages">
+    <div class="grid gap-y-2">
+      <!-- Chat Messages -->
+       <app-chat-message text="How I can help you?"></app-chat-message>
+
+      @for (message of messages(); track $index) {
+        @if (message.isGpt) {
+          <app-chat-message [text]="message.text"></app-chat-message>
+        } @else {
+          <app-my-message [text]="message.text"></app-my-message>
+        }
+      }
+
+      @if (isLoading()) {
+        <app-typing-loader></app-typing-loader>
+      }
+
+    </div>
+  </div>
+
+  <!-- Message Box-->
+  <app-text-message-box-select
+    placeholder="Write the text that you want to translate..."
+    [options]="languages()"
+    (onMessage)="handleMessageWithSelect($event)"
+  ></app-text-message-box-select>
+</div>

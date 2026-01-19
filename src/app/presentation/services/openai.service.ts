@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProConsResponse } from '@interfaces/pro-cons.response';
-import { orthographyUseCase, proConsDiscusserUseCase, proConsStreamUseCase } from '@use-cases/index';
+import { orthographyUseCase, proConsDiscusserUseCase, proConsStreamUseCase, translateUseCase } from '@use-cases/index';
 import { from, map } from 'rxjs';
 
 @Injectable({
@@ -24,5 +24,9 @@ export class OpenAiService {
 
   proConsStream(prompt: string, abortSignal: AbortSignal) {
     return proConsStreamUseCase(prompt, abortSignal);
+  }
+
+  translate(prompt: string, lang: string) {
+    return from(translateUseCase(prompt, lang));
   }
 }
