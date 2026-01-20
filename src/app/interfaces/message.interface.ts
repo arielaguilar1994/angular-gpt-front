@@ -1,7 +1,8 @@
 export interface IMessage {
   text: string;
   isGpt: boolean;
-  info?: IInfoMessage
+  info?: IInfoMessage;
+  audioUrl?: string | null;
 }
 
 interface IInfoMessage {
