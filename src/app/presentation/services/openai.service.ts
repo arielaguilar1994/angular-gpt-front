@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IProConsResponse } from '@interfaces/pro-cons.response';
-import { orthographyUseCase, proConsDiscusserUseCase, proConsStreamUseCase, transformTextToAudioUseCase, translateUseCase } from '@use-cases/index';
+import {
+  audioToTextUseCase,
+  orthographyUseCase,
+  proConsDiscusserUseCase,
+  proConsStreamUseCase,
+  transformTextToAudioUseCase,
+  translateUseCase,
+} from '@use-cases/index';
 import { from, map } from 'rxjs';
 
 @Injectable({
@@ -18,7 +25,7 @@ export class OpenAiService {
           text: response.parts[0]?.text ?? '',
           role: response.role,
         } as IProConsResponse;
-      })
+      }),
     );
   }
 
@@ -32,5 +39,9 @@ export class OpenAiService {
 
   transformToAudio(prompt: string, voice: string) {
     return from(transformTextToAudioUseCase(prompt, voice));
+  }
+
+  audioToText(file: File, prompt?: string | null) {
+    return from(audioToTextUseCase(file, prompt));
   }
 }
