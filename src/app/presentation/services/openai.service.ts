@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IProConsResponse } from '@interfaces/pro-cons.response';
 import {
   audioToTextUseCase,
+  imageGenerationUseCase,
   orthographyUseCase,
   proConsDiscusserUseCase,
   proConsStreamUseCase,
@@ -43,5 +44,9 @@ export class OpenAiService {
 
   audioToText(file: File, prompt?: string | null) {
     return from(audioToTextUseCase(file, prompt));
+  }
+
+  imageGeneration(prompt: string, image?: string) {
+    return from(imageGenerationUseCase(prompt, image))
   }
 }

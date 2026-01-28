@@ -12,6 +12,12 @@
       @if (audioUrl()) {
         <audio controls [src]="audioUrl()" autoplay></audio>
       }
+
+      @if (imageUrl()) {
+        <div class="mt-2">
+          <img [src]="imageUrl()?.url" [alt]="imageUrl()?.alt || 'Generated Image'" class="rounded-md w-96 h-96 object-cover"/>
+        </div>
+      }
     </div>
   </div>
 </div>
