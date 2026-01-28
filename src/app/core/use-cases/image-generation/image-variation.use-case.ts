@@ -1,16 +1,15 @@
 import { GeneratedImage, ImageGenerationResponse } from '@interfaces/index';
 import { environment } from 'environments/environment';
 
-export const imageGenerationUseCase = async (promp: string, originalImage?: string, maskImage?: string): Promise<GeneratedImage> => {
+export const imageVariationUseCase = async (originalImage: string): Promise<GeneratedImage> => {
   try {
-    const imageName = getNameImageFromUrl(originalImage);
-    maskImage = removeBase64Header(maskImage);
-    const resp = await fetch(`${environment.backendApi}/image-generation`, {
+    const nameImage = getNameImageFromUrl(originalImage);
+    const resp = await fetch(`${environment.backendApi}/image-variation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ prompt: promp, originalImage: imageName, maskImage }),
+      body: JSON.stringify({ baseImage: nameImage }),
     });
 
     // Este :alt es para renombrar la propiedad
@@ -32,11 +31,4 @@ const getNameImageFromUrl = (url?: string): string | undefined => {
   const arrayParts = url.split('/');
   const arrayName = arrayParts[arrayParts.length - 1 ].split('.');
   return arrayName[0];
-}
-
-const removeBase64Header = (dataUrl?: string): string | undefined => {
-  if(!dataUrl) return undefined;
-  
-  const base64Index = dataUrl.indexOf('base64,');
-  return base64Index > -1 ? dataUrl.substring(base64Index + 7) : dataUrl;
 }

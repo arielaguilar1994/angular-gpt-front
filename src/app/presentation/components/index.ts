@@ -8,4 +8,6 @@ export * from './text-boxes/text-message-box/text-message-box';
 export * from './text-boxes/text-message-box-file/text-message-box-file';
 export * from './text-boxes/text-message-box-select/text-message-box-select';
 
+export * from './gpt-message-editable-image/gpt-message-editable-image';
+
 export * from './typing-loader/typing-loader';

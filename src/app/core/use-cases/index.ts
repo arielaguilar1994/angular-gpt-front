@@ -10,3 +10,4 @@ export * from './text-to-audio/textToAudio.use-case';
 export * from './audio-to-text/audio-to-text.use-case';
 
 export * from './image-generation/image-generation.use-case';
+export * from './image-generation/image-variation.use-case';

@@ -3,6 +3,7 @@ import { IProConsResponse } from '@interfaces/pro-cons.response';
 import {
   audioToTextUseCase,
   imageGenerationUseCase,
+  imageVariationUseCase,
   orthographyUseCase,
   proConsDiscusserUseCase,
   proConsStreamUseCase,
@@ -46,7 +47,11 @@ export class OpenAiService {
     return from(audioToTextUseCase(file, prompt));
   }
 
-  imageGeneration(prompt: string, image?: string) {
-    return from(imageGenerationUseCase(prompt, image))
+  imageGeneration(prompt: string, image?: string, maskImage?: string) {
+    return from(imageGenerationUseCase(prompt, image, maskImage))
+  }
+
+  imageVariation(image: string) {
+    return from(imageVariationUseCase(image));
   }
 }
